@@ -21,8 +21,8 @@ abstract class Controller {
 		if (class_exists($path)) {
 		    $db = DB::getConnect();
 		    $dbDriver = new DBDriver($db);
-		    $table = $name . 's';
-			return new $path($dbDriver, $table);
+		    $tableName = $name . 's';
+			return new $path($dbDriver, $table = $tableName);
 		}
 	}
 

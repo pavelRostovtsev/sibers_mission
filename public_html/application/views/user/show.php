@@ -9,9 +9,5 @@
             <p>Пол: <?=$data['gender']?></p>
             <p>Дата рождения: <?=$data['date']?></p>
         </div>
-        <div class="mt-5">
-            <button class="btn btn-warning mr-3 mt-3"><a class="badge text-dark" href="user/edit/<?=$data['id']?>">Изменить</a></button>
-            <button class="btn btn-danger ml-3 mt-3"><a class="badge text-dark" href="user/delete/<?=$data['id']?>">Удалить</a></button>
-        </div>
     </row>
 </div>

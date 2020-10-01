@@ -78,8 +78,6 @@ Class DBDriver
 				$stmt = $this->pdo->prepare($sql);
 				$stmt->bindValue(1,$value);
 				$stmt->execute();
-				return true;
-				
 			}
 		}
 
@@ -112,15 +110,10 @@ Class DBDriver
 					$stmt = $this->pdo->prepare($sql);
 					$stmt->bindValue(1,$value);
 					$stmt->execute();
-					return true;
 				}			
 
-			} else {
-				return false;
 			}
-			
 		}
 
-		return false;
 	}
 }

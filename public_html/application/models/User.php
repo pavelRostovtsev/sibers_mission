@@ -11,7 +11,7 @@ class User extends Model
 {
 
 	public $error;
-
+    private const TABLE = 'users';
 	public function contactValidate($post)
 	{
 		$nameLen = iconv_strlen($post['name']);
