@@ -10,10 +10,10 @@ class UserController extends Controller {
 
     public function index()
     {
-        $pagination = new Pagination($this->route, 10);
+        $pagination = new Pagination($this->route, $this->model->recordCount());
         $vars = [
             'pagination' => $pagination->get(),
-            'users' => $this->model->getAll($this->route),
+            'users' => $this->model->getAllRecord($this->route),
         ];
         $this->view->render('Главная страница', $vars);
     }
@@ -25,7 +25,7 @@ class UserController extends Controller {
 
     public function store()
     {
-        $this->model->Add($_POST);
+        $this->model->addRecord($_POST);
         $this->view->message('success', 'Пост добавлен');
     }
 

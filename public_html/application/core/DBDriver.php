@@ -16,8 +16,7 @@ Class DBDriver
 	}
 
 	public function select($sql, array $params = [], $fetch = self::FETCH_ALL)
-	{	
-
+	{
 		$stmt = $this->pdo->prepare($sql);
 		if (!empty($params)) {
 			foreach ($params as $key => $val) {

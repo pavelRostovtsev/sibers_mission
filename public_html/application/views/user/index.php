@@ -36,7 +36,7 @@
         </table>
 
         <div class="clearfix">
-            <?php echo $pagination; ?>
+            <?=$pagination;?>
         </div>
     </div>
 </div>
