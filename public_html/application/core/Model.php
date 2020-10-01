@@ -7,25 +7,15 @@ namespace public_html\application\core;
 
 abstract class Model
 {
-    private $db;
+
     private $dbDriver;
     private $errors;
+    private $table;
 
-    public function __construct()
+    public function __construct($dbDriver, $table)
     {
-        $this->db = DB::getConnect();
-        $this->dbDriver = new DBDriver($this->getDb());
-
-    }
-
-    public function getDb()
-    {
-        return $this->db;
-    }
-
-    public function getDBDriver()
-    {
-        return $this->dbDriver;
+        $this->dbDriver = $dbDriver;
+        $this->table = $table;
     }
 
     public function errorsRecording($error)
@@ -38,53 +28,49 @@ abstract class Model
         return $this->errors;
     }
 
-    public function postsCount()
+    public function recordCount()
     {
-
-        $this->getDBDriver()->column('SELECT COUNT(id) FROM posts');
+        return $this->dbDriver->column("SELECT COUNT(id) FROM {$this->table}");
     }
 
-    public function getAll($route)
+    public function getAllRecord($route)
     {
 
-        $max = 10;
+        $max = 8;
         $params = [
             'max' => $max,
             'start' => ((($route['page'] ?? 1) - 1) * $max),
         ];
-        return $this->getDBDriver()->select('SELECT * FROM users ORDER BY id DESC LIMIT :start, :max', $params);
+
+        return $this->dbDriver->select("SELECT * FROM {$this->table} ORDER BY id DESC LIMIT :start, :max", $params);
     }
 
-    public function Add($post)
+    public function addRecord($post)
     {
         $params = [];
         $dataPost = $_POST;
         foreach ($dataPost as $key => $data) {
             $params[$key] = $data;
         }
-        return $this->getDBDriver()->insert('users',$params);
+        return $this->dbDriver->insert($this->table,$params);
 
     }
 
     public function isRecordExists($id)
     {
-        $db = DB::getConnect();
-        $dbDriver = new DBDriver($db);
         $params = [
             'id' => $id,
         ];
-        return $this->getDBDriver()->column('SELECT id FROM users WHERE id = :id',$params);
+        return $this->dbDriver->column("SELECT id FROM {$this->table} WHERE id = :id",$params);
 
     }
 
     public function getOne($id)
     {
-        $db = DB::getConnect();
-        $dbDriver = new DBDriver($db);
         $params = [
             'id' => $id,
         ];
-        return $this->getDBDriver()->select('SELECT * FROM users WHERE id = :id', $params);
+        return $this->dbDriver->select("SELECT * FROM {$this->table} WHERE id = :id", $params);
     }
 
     public function recordUpdate($id)
@@ -94,7 +80,7 @@ abstract class Model
         foreach ($dataPost as $key => $data) {
             $params[$key] = $data;
         }
-        $this->getDBDriver()->update('users',$params,
+        $this->dbDriver->update($this->table,$params,
             [
                 'id',
                 '=',
@@ -109,7 +95,7 @@ abstract class Model
             '=',
             $id
         ];
-        $this->getDBDriver()->delete('users',$where);
+        $this->dbDriver->delete($this->table,$where);
     }
 
 

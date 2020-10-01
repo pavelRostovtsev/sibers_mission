@@ -2,9 +2,9 @@
 
 namespace public_html\application\lib;
 
-class Pagination 
+class Pagination
 {
-    
+
     private $max = 10;
     private $route;
     private $index = '';
@@ -12,7 +12,7 @@ class Pagination
     private $total;
     private $limit;
 
-    public function __construct($route, $total, $limit = 10)
+    public function __construct($route, $total, $limit = 9)
     {
         $this->route = $route;
         $this->total = $total;
@@ -20,8 +20,8 @@ class Pagination
         $this->amount = $this->amount();
         $this->setCurrentPage();
     }
-   
-    public function get() 
+
+    public function get()
     {
         $links = null;
         $limits = $this->limits();
@@ -35,17 +35,17 @@ class Pagination
         }
         if (!is_null($links)) {
             if ($this->current_page > 1) {
-                $links = $this->generateHtml(1, 'Вперед').$links;
+                $links = $this->generateHtml(1, 'Назад').$links;
             }
             if ($this->current_page < $this->amount) {
-                $links .= $this->generateHtml($this->amount, 'Назад');
+                $links .= $this->generateHtml($this->amount, 'Вперед');
             }
         }
         $html .= $links.' </ul></nav>';
         return $html;
     }
 
-    private function generateHtml($page, $text = null) 
+    private function generateHtml($page, $text = null)
     {
         if (!$text) {
             $text = $page;
@@ -53,7 +53,7 @@ class Pagination
         return '<li class="page-item"><a class="page-link" href="/'.$this->route['controller'].'/'.$this->route['action'].'/'.$page.'">'.$text.'</a></li>';
     }
 
-    private function limits() 
+    private function limits()
     {
         $left = $this->current_page - round($this->max / 2);
         $start = $left > 0 ? $left : 1;
@@ -67,7 +67,7 @@ class Pagination
         return array($start, $end);
     }
 
-    private function setCurrentPage() 
+    private function setCurrentPage()
     {
         if (isset($this->route['page'])) {
             $currentPage = $this->route['page'];
@@ -84,7 +84,7 @@ class Pagination
         }
     }
 
-    private function amount() 
+    private function amount()
     {
         return ceil($this->total / $this->limit);
     }

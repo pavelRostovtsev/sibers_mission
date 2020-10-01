@@ -19,7 +19,10 @@ abstract class Controller {
 	public function loadModel($name) {
 		$path = 'public_html\application\models\\'.ucfirst($name);
 		if (class_exists($path)) {
-			return new $path(new DBDriver(DB::getConnect()));
+		    $db = DB::getConnect();
+		    $dbDriver = new DBDriver($db);
+		    $table = $name . 's';
+			return new $path($dbDriver, $table);
 		}
 	}
 
