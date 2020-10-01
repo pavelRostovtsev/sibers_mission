@@ -6,7 +6,7 @@ use public_html\application\core\View;
 
 abstract class Controller {
 
-	public $route;
+    public $route;
 	public $view;
 
 	public function __construct($route) {
@@ -25,5 +25,15 @@ abstract class Controller {
 			return new $path($dbDriver, $table = $tableName);
 		}
 	}
+
+    public function getRoute()
+    {
+        return $this->route;
+    }
+
+    public function getView()
+    {
+        return $this->view;
+    }
 
 }

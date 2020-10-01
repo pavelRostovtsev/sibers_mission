@@ -12,19 +12,18 @@
     <script src="/public_html/public/scripts/form.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
-    <header>
-        <!-- Image and text -->
-        <nav class="navbar navbar-light bg-info d-flex justify-content-center">
-                <div>
-                    <a class="badge badge-warning" href="#"><h2>Админ панель</h2></a>
-                </div>
-        </nav>
-    </header>
-    <main class="mt-2"><?=$content?></main>
-    <footer class="mastfoot mt-auto bg-info d-flex justify-content-center ">
-        <div class="inner">
-            <a class="badge badge-warning" href="https://barnaul.hh.ru/resume/717d48caff07d50fac0039ed1f755564677454#key-skills">hh</a>
+<header>
+    <nav class="navbar navbar-light bg-info d-flex justify-content-center">
+        <div>
+            <a class="badge badge-warning" href="#"><h2>Админ панель</h2></a>
         </div>
-    </footer>
+    </nav>
+</header>
+<main class="mt-2"><?=$content?></main>
+<footer class="mastfoot mt-auto bg-info d-flex justify-content-center ">
+    <div class="inner">
+        <a class="badge badge-warning" href="https://barnaul.hh.ru/resume/717d48caff07d50fac0039ed1f755564677454#key-skills">hh</a>
+    </div>
+</footer>
 </body>
 </html>

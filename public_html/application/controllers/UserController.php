@@ -13,61 +13,61 @@ class UserController extends Controller {
         $pagination = new Pagination($this->route, $this->model->recordCount());
         $vars = [
             'pagination' => $pagination->get(),
-            'users' => $this->model->getAllRecord($this->route),
+            'users' => $this->model->getAllRecord($this->getRoute()),
         ];
-        $this->view->render('Главная страница', $vars);
+        $this->getView()->render('Главная страница', $vars);
     }
 
     public function create()
     {
-        $this->view->render('Добавить сотрудника');
+        $this->getView()->render('Добавить сотрудника');
     }
 
     public function store()
     {
         $this->model->addRecord($_POST);
-        $this->view->message('success', 'Пост добавлен');
+        $this->getView()->message('success', 'Пост добавлен');
     }
 
     public function show()
     {
         if (!$this->model->isRecordExists($this->route['id'])) {
-            $this->view->errorCode(404);
+            $this->getView()->errorCode(404);
         }
         $vars = [
             'data' => $this->model->getOne($this->route['id'])[0],
         ];
-        $this->view->render('Пост', $vars);
+        $this->getView()->render('Пост', $vars);
     }
 
     public function edit()
     {
         if (!$this->model->isRecordExists($this->route['id'])) {
-            $this->view->errorCode(404);
+            $this->getView()->errorCode(404);
         }
         $vars = [
             'data' => $this->model->getOne($this->route['id'])[0],
         ];
-        $this->view->render('Добавить сотрудника', $vars);
+        $this->getView()->render('Добавить сотрудника', $vars);
     }
 
     public function update()
     {
         if (!$this->model->isRecordExists($this->route['id'])) {
-            $this->view->errorCode(404);
+            $this->getView()->errorCode(404);
         }
         $this->model->recordUpdate($this->route['id']);
-        $this->view->redirect('');
+        $this->getView()->redirect('');
 
     }
 
     public function destroy()
     {
-        if (!$this->model->isRecordExists($this->route['id'])) {
-            $this->view->errorCode(404);
+        if (!$this->getView()->isRecordExists($this->route['id'])) {
+            $this->getView()->errorCode(404);
         }
         $this->model->recordDelete($this->route['id']);
-        $this->view->redirect('');
+        $this->getView()->redirect('');
 
     }
 

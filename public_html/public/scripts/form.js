@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('form').submit(function(event) {
+	$('form').button(function(event) {
 		var json;
 		event.preventDefault();
 		$.ajax({
