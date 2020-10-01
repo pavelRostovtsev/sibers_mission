@@ -26,9 +26,9 @@
                 <td><?=$user['name']?></td>
                 <td><?=$user['surname']?></td>
                 <td>
-                    <button type="submit" class="btn btn-info"><a class="badge text-dark" href="user/show/<?=$user['id']?>">Смотреть</a></button>
-                    <button type="submit" class="btn btn-warning"><a class="badge text-dark" href="user/edit/<?=$user['id']?>">Изменить</a></button>
-                    <button type="submit" class="btn btn-danger"><a class="badge text-dark" href="user/destroy/<?=$user['id']?>">Удалить</a></button>
+                    <button type="button" class="btn btn-info"><a class="badge text-dark" href="/user/show/<?=$user['id']?>">Смотреть</a></button>
+                    <button type="button" class="btn btn-warning"><a class="badge text-dark" href="/user/edit/<?=$user['id']?>">Изменить</a></button>
+                    <button type="button" class="btn btn-danger"><a class="badge text-dark" href="/user/destroy/<?=$user['id']?>">Удалить</a></button>
                 </td>
             </tr>
             </tbody>

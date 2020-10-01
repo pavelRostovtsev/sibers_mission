@@ -8,9 +8,9 @@ namespace public_html\application\core;
 abstract class Model
 {
 
-    private $dbDriver;
-    private $errors;
-    private $table;
+    protected $dbDriver;
+    protected $errors;
+    protected $table;
 
     public function __construct($dbDriver, $table)
     {
