@@ -6,7 +6,7 @@ use public_html\application\core\Controller;
 use public_html\application\lib\Pagination;
 use public_html\application\core\User;
 
-class UserController extends Controller {
+class LoginController extends Controller {
 
     public function index()
     {
