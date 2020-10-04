@@ -2,9 +2,6 @@
 
 namespace public_html\application\core;
 
-// use public_html\application\core\DB;
-// use public_html\application\core\DBDriver;
-
 abstract class Model
 {
 
@@ -50,6 +47,7 @@ abstract class Model
         $params = [];
         $dataPost = $_POST;
         foreach ($dataPost as $key => $data) {
+            if ($key === 'csrf') continue;
             $params[$key] = $data;
         }
         return $this->dbDriver->insert($this->table,$params);
@@ -78,6 +76,7 @@ abstract class Model
         $params = [];
         $dataPost = $_POST;
         foreach ($dataPost as $key => $data) {
+            if ($key === 'csrf') continue;
             $params[$key] = $data;
         }
         $this->dbDriver->update($this->table,$params,

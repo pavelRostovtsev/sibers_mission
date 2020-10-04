@@ -3,6 +3,7 @@
 namespace public_html\application\core;
 
 use public_html\application\core\View;
+use public_html\application\services\DBDriver;
 
 abstract class Controller {
 

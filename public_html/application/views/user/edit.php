@@ -41,6 +41,8 @@
                 <input name="date" type="date" class="form-control" id="exampleInputDate" value="<?=$data['date']?>">
             </div>
 
+            <input type="hidden" name="csrf" value="<?=$csrf;?>">
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

@@ -1,3 +1,8 @@
+<?php
+
+use public_html\application\services\Session;
+
+?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -8,8 +13,10 @@
     <title>Document</title>
     <link href="/public_html/public/styles/main.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="/public_html/public/scripts/jquery.js"></script>
-    <script src="/public_html/public/scripts/form.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--    <script src="/public_html/public/scripts/form.js"></script>-->
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header>
@@ -25,5 +32,15 @@
         <a class="badge badge-warning" href="https://barnaul.hh.ru/resume/717d48caff07d50fac0039ed1f755564677454#key-skills">hh</a>
     </div>
 </footer>
+
+<?php if (!Session::existsFlash('success')) : ?>
+    <div class="flash alert alert-success alert-dismissible fade show fixed-top" role="alert">
+        <p class="text-center"><?=Session::flash('success');?></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+<?php endif;?>
+
 </body>
 </html>

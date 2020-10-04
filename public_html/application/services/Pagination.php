@@ -1,6 +1,6 @@
 <?php
 
-namespace public_html\application\lib;
+namespace public_html\application\services;
 
 class Pagination
 {

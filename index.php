@@ -1,8 +1,6 @@
 <?php 
 session_start();
 
-include_once 'public_html/application/lib/Dev.php';
-
 use public_html\application\core\Router;
 
 spl_autoload_register(function ($className)

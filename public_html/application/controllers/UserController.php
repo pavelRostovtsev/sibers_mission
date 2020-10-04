@@ -3,8 +3,10 @@
 namespace public_html\application\controllers;
 
 use public_html\application\core\Controller;
-use public_html\application\lib\Pagination;
-use public_html\application\core\User;
+use public_html\application\services\Pagination;
+use public_html\application\services\Redirect;
+use public_html\application\services\Session;
+use public_html\application\services\CSRF;
 
 class UserController extends Controller {
 
@@ -20,13 +22,18 @@ class UserController extends Controller {
 
     public function create()
     {
-        $this->getView()->render('Добавить сотрудника');
+        $vars = [
+            'csrf' => CSRF::generate(),
+        ];
+        $this->getView()->render('Добавить сотрудника', $vars);
+
     }
 
     public function store()
     {
         $this->model->addRecord($_POST);
-        $this->getView()->message('success', 'Пост добавлен');
+        Session::flash('success', 'Сотрудник добавлен!');
+        Redirect::redirect('');
     }
 
     public function show()
@@ -47,27 +54,32 @@ class UserController extends Controller {
         }
         $vars = [
             'data' => $this->model->getOne($this->route['id'])[0],
+            'csrf' => CSRF::generate(),
         ];
         $this->getView()->render('Добавить сотрудника', $vars);
     }
 
     public function update()
     {
+        var_dump($_POST['csrf']);die;
+        var_dump(CSRF::check($_POST['CSRF']));die;
         if (!$this->model->isRecordExists($this->route['id'])) {
             $this->getView()->errorCode(404);
         }
         $this->model->recordUpdate($this->route['id']);
-        $this->getView()->redirect('');
+        Session::flash('success', 'Данные о сотруднике изменены!');
+        Redirect::redirect('');
 
     }
 
     public function destroy()
     {
-        if (!$this->getView()->isRecordExists($this->route['id'])) {
+        if (!$this->model->isRecordExists($this->route['id'])) {
             $this->getView()->errorCode(404);
         }
         $this->model->recordDelete($this->route['id']);
-        $this->getView()->redirect('');
+        Session::flash('success', 'Сотрудник удален!');
+        Redirect::redirect('');
 
     }
 

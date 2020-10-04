@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace public_html\application\core;
+namespace public_html\application\services;
 use PDO;
 Class DBDriver
 {	
