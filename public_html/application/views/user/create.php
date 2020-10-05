@@ -26,8 +26,8 @@
                 <div>
                     <label for="gender">gender</label>
                     <select name="gender" id="">
-                        <option value="1">man</option>
-                        <option value="2">wooman</option>
+                        <option value="man">man</option>
+                        <option value="wooman">wooman</option>
                     </select>
                 </div>
             </div>

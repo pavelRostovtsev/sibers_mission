@@ -1,6 +1,7 @@
 <?php
 
 namespace public_html\application\core;
+use public_html\application\services\Validate;
 
 abstract class Model
 {
@@ -9,10 +10,11 @@ abstract class Model
     protected $errors;
     protected $table;
 
-    public function __construct($dbDriver, $table)
+    public function __construct($dbDriver, $table, $validator)
     {
         $this->dbDriver = $dbDriver;
         $this->table = $table;
+        $this->validator = $validator;
     }
 
     public function errorsRecording($error)

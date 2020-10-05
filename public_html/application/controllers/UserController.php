@@ -3,12 +3,21 @@
 namespace public_html\application\controllers;
 
 use public_html\application\core\Controller;
+use public_html\application\core\View;
 use public_html\application\services\Pagination;
 use public_html\application\services\Redirect;
 use public_html\application\services\Session;
 use public_html\application\services\CSRF;
 
 class UserController extends Controller {
+
+//    public function __construct($route)
+//    {
+//        parent::__construct($route);
+//        if (!$_SESSION['auth']) {
+//            echo 'вы не авторизованы';die;
+//        }
+//    }
 
     public function index()
     {
@@ -61,15 +70,16 @@ class UserController extends Controller {
 
     public function update()
     {
-        var_dump($_POST['csrf']);die;
-        var_dump(CSRF::check($_POST['CSRF']));die;
-        if (!$this->model->isRecordExists($this->route['id'])) {
-            $this->getView()->errorCode(404);
+        if (CSRF::check($_POST['csrf'])) {
+            if (!$this->model->isRecordExists($this->route['id'])) {
+                $this->getView()->errorCode(404);
+            }
+            $this->model->recordUpdate($this->route['id']);
+            Session::flash('success', 'Данные о сотруднике изменены!');
+            Redirect::redirect('');
+        } else {
+            View::errorCode(403);
         }
-        $this->model->recordUpdate($this->route['id']);
-        Session::flash('success', 'Данные о сотруднике изменены!');
-        Redirect::redirect('');
-
     }
 
     public function destroy()

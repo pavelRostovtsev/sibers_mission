@@ -2,8 +2,8 @@
 
 namespace public_html\application\core;
 
-use public_html\application\core\View;
 use public_html\application\services\DBDriver;
+use public_html\application\services\Validate;
 
 abstract class Controller {
 
@@ -23,7 +23,8 @@ abstract class Controller {
 		    $db = DB::getConnect();
 		    $dbDriver = new DBDriver($db);
 		    $tableName = $name . 's';
-			return new $path($dbDriver, $table = $tableName);
+		    $validator = new Validate($db);
+			return new $path($dbDriver, $table = $tableName, $validator);
 		}
 	}
 

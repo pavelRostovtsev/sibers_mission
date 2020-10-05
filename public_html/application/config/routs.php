@@ -33,5 +33,13 @@ return [
         'controller' => 'user',
         'action' => 'destroy',
     ],
+    'user/sign-in' => [
+        'controller' => 'user',
+        'action' => 'signIn',
+    ],
+    'user/authorization' => [
+        'controller' => 'user',
+        'action' => 'authorization',
+    ],
 
 ];

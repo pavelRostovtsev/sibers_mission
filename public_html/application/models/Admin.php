@@ -1,12 +1,12 @@
-<?php 
+<?php
 
 namespace public_html\application\models;
 
 use public_html\application\core\Model;
 
-class User extends Model
+class Admin extends Model
 {
-	public $error;
+    public $error;
     private const TABLE = 'users';
     private $rules = [
         'password' => [
@@ -14,7 +14,6 @@ class User extends Model
         ],
         'login' => [
             'required' => true,
-            'unique' => 'users',
         ],
         'name' => [
             'required' => true,

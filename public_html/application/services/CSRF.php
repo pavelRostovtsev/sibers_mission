@@ -15,7 +15,7 @@ class CSRF
 
 	public static function check ($token) {
 
-		if (Session::exists(CSRF::TOKEN_NAME) && $token == Session::get(TOKEN_NAME)) {
+		if (Session::exists(CSRF::TOKEN_NAME) && $token == Session::get(CSRF::TOKEN_NAME)) {
 			Session::delete(CSRF::TOKEN_NAME);
 			return true;
 		}
