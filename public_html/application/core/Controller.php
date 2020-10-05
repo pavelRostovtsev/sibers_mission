@@ -23,8 +23,7 @@ abstract class Controller {
 		    $db = DB::getConnect();
 		    $dbDriver = new DBDriver($db);
 		    $tableName = $name . 's';
-		    $validator = new Validate($db);
-			return new $path($dbDriver, $table = $tableName, $validator);
+			return new $path($dbDriver, $table = $tableName);
 		}
 	}
 

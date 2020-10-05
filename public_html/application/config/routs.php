@@ -33,12 +33,12 @@ return [
         'controller' => 'user',
         'action' => 'destroy',
     ],
-    'user/sign-in' => [
-        'controller' => 'user',
+    'admin/sign-in' => [
+        'controller' => 'admin',
         'action' => 'signIn',
     ],
-    'user/authorization' => [
-        'controller' => 'user',
+    'admin/authorization' => [
+        'controller' => 'admin',
         'action' => 'authorization',
     ],
 

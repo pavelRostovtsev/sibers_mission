@@ -1,6 +1,6 @@
 <div class="container d-flex justify-content-md-center mt-5">
     <div class="row ">
-        <form action="/user/authorization" method="post">
+        <form action="/admin/authorization" method="post">
 
             <div class="form-group">
                 <label for="exampleInputLogin">Login</label>

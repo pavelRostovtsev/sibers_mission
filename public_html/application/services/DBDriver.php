@@ -32,8 +32,14 @@ Class DBDriver
 
 		return $fetch === self::FETCH_ALL ? $stmt->fetchAll(PDO::FETCH_ASSOC) : $stmt->fetch(PDO::FETCH_ASSOC);
 	}
+
+	public function rowCount($query)
+    {
+        $query->rowCount();
+    }
+
 	public function column($sql, $params = []) {
-		
+
 		$stmt = $this->pdo->prepare($sql);
 		if (!empty($params)) {
 			foreach ($params as $key => $val) {

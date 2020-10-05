@@ -2,6 +2,7 @@
 
 namespace public_html\application\services;
 
+use public_html\application\core\DB;
 class Validate
 {
     private $passed = false, $errors = [], $db = null;
@@ -41,13 +42,10 @@ class Validate
                             break;
 
                         case 'unique':
-                            $check = $this->db->get($rule_value,[$item, '=', $value]);
-                            if($check->count()){
+                            $check = $this->db->select("SELECT * FROM {$rule_value} WHERE {$item} = '{$value}'",[],'one');
+
+                            if($check){
                                 $this->addError("{$item} не уникальный");
-                            }
-                        case 'email':
-                            if(!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-                                $this->addError("{$item} не является мылом");
                             }
 
                             break;

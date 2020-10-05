@@ -40,6 +40,13 @@ use public_html\application\services\Session;
             <span aria-hidden="true">&times;</span>
      </button>
     </div>
+<?php elseif (!Session::existsFlash('errors')) : ?>
+    <div class="flash alert alert-danger alert-dismissible fade show fixed-top" role="alert">
+        <p class="text-center"><?=Session::flash('errors');?></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 <?php endif;?>
 
 </body>

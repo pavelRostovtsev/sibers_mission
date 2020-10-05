@@ -6,8 +6,7 @@ use public_html\application\core\Model;
 
 class Admin extends Model
 {
-    public $error;
-    private const TABLE = 'users';
+
     private $rules = [
         'password' => [
             'required' => true,
@@ -15,20 +14,19 @@ class Admin extends Model
         'login' => [
             'required' => true,
         ],
-        'name' => [
-            'required' => true,
-        ],
-        'surname' => [
-            'required' => true,
-        ],
-        'gender' => [
-            'required' => true,
-        ],
-        'date' => [
-            'required' => true,
-        ],
-
     ];
+
+    public function __construct($dbDriver, $table)
+    {
+        parent::__construct($dbDriver, $table);
+        $this->dbDriver = $dbDriver;
+        $this->table = "users";
+    }
+
+    public function getRules()
+    {
+        return $this->rules;
+    }
 
 
 }

@@ -31,5 +31,10 @@ class User extends Model
 
     ];
 
+    public function getRules()
+    {
+        return $this->rules;
+    }
+
 
 }

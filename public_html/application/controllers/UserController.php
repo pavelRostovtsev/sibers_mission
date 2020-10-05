@@ -8,6 +8,7 @@ use public_html\application\services\Pagination;
 use public_html\application\services\Redirect;
 use public_html\application\services\Session;
 use public_html\application\services\CSRF;
+use public_html\application\services\Validate;
 
 class UserController extends Controller {
 
@@ -40,6 +41,15 @@ class UserController extends Controller {
 
     public function store()
     {
+        $validate = new Validate($this->model->getDbDriver());
+        $validate->check($_POST,$this->model->getRules());
+        if (!$validate->passed()) {
+            $errors = $validate->errors();
+            $errors = implode("<br>",$errors);
+            Session::flash('errors', "$errors");
+            Redirect::redirect('user/create');
+        }
+
         $this->model->addRecord($_POST);
         Session::flash('success', 'Сотрудник добавлен!');
         Redirect::redirect('');
@@ -64,6 +74,7 @@ class UserController extends Controller {
         $vars = [
             'data' => $this->model->getOne($this->route['id'])[0],
             'csrf' => CSRF::generate(),
+            'id' => $this->route['id'],
         ];
         $this->getView()->render('Добавить сотрудника', $vars);
     }
@@ -74,6 +85,17 @@ class UserController extends Controller {
             if (!$this->model->isRecordExists($this->route['id'])) {
                 $this->getView()->errorCode(404);
             }
+
+            $validate = new Validate($this->model->getDbDriver());
+            $validate->check($_POST,$this->model->getRules());
+            if (!$validate->passed()) {
+                $errors = $validate->errors();
+                $errors = implode("<br>",$errors);
+                Session::flash('errors', "$errors");
+                $id = $_POST['id'];
+                Redirect::redirect("user/edit/$id");
+            }
+
             $this->model->recordUpdate($this->route['id']);
             Session::flash('success', 'Данные о сотруднике изменены!');
             Redirect::redirect('');

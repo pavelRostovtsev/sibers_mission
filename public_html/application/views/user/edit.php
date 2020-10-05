@@ -42,6 +42,7 @@
             </div>
 
             <input type="hidden" name="csrf" value="<?=$csrf;?>">
+            <input type="hidden" name="id" value="<?=$id;?>">
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

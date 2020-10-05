@@ -4,13 +4,14 @@ namespace public_html\application\controllers;
 
 use public_html\application\core\Controller;
 use public_html\application\core\View;
-use public_html\application\services\Pagination;
 use public_html\application\services\Redirect;
 use public_html\application\services\Session;
 use public_html\application\services\CSRF;
+use public_html\application\services\Validate;
 
-class UserController extends Controller {
+class AdminController extends Controller {
 
+    const ROLESADMIN = 1;
 //    public function __construct($route)
 //    {
 //        parent::__construct($route);
@@ -25,7 +26,15 @@ class UserController extends Controller {
 
     public function authorization()
     {
-        echo '1';
+        $validate = new Validate($this->model->getDbDriver());
+        $validate->check($_POST,$this->model->getRules());
+        if (!$validate->passed()) {
+            $errors = $validate->errors();
+            $errors = implode("<br>",$errors);
+            Session::flash('errors', "$errors");
+            Redirect::redirect('admin/sign-in');
+        }
+
     }
 
 
