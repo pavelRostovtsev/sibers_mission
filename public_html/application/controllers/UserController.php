@@ -4,6 +4,7 @@ namespace public_html\application\controllers;
 
 use public_html\application\core\Controller;
 use public_html\application\core\View;
+use public_html\application\services\Flash;
 use public_html\application\services\Pagination;
 use public_html\application\services\Redirect;
 use public_html\application\services\Session;
@@ -46,12 +47,12 @@ class UserController extends Controller {
         if (!$validate->passed()) {
             $errors = $validate->errors();
             $errors = implode("<br>",$errors);
-            Session::flash('errors', "$errors");
+            Flash::flash('errors', "$errors");
             Redirect::redirect('user/create');
         }
 
         $this->model->addRecord($_POST);
-        Session::flash('success', 'Сотрудник добавлен!');
+        Flash::flash('success', 'Сотрудник добавлен!');
         Redirect::redirect('');
     }
 
@@ -91,13 +92,13 @@ class UserController extends Controller {
             if (!$validate->passed()) {
                 $errors = $validate->errors();
                 $errors = implode("<br>",$errors);
-                Session::flash('errors', "$errors");
+                Flash::flash('errors', "$errors");
                 $id = $_POST['id'];
                 Redirect::redirect("user/edit/$id");
             }
 
             $this->model->recordUpdate($this->route['id']);
-            Session::flash('success', 'Данные о сотруднике изменены!');
+            Flash::flash('success', 'Данные о сотруднике изменены!');
             Redirect::redirect('');
         } else {
             View::errorCode(403);
@@ -110,7 +111,7 @@ class UserController extends Controller {
             $this->getView()->errorCode(404);
         }
         $this->model->recordDelete($this->route['id']);
-        Session::flash('success', 'Сотрудник удален!');
+        Flash::flash('success', 'Сотрудник удален!');
         Redirect::redirect('');
 
     }

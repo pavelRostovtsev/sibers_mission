@@ -4,6 +4,7 @@ namespace public_html\application\core;
 
 use public_html\application\services\DBDriver;
 use public_html\application\services\Validate;
+use public_html\application\services\Flash;
 
 abstract class Controller {
 

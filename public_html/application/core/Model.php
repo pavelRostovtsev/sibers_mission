@@ -23,16 +23,6 @@ abstract class Model
         return $this->table;
     }
 
-    public function errorsRecording($error)
-    {
-        $this->errors = $error;
-    }
-
-    public function errorsReporting()
-    {
-        return $this->errors;
-    }
-
     public function recordCount()
     {
         return $this->dbDriver->column("SELECT COUNT(id) FROM {$this->table}");

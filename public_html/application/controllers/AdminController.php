@@ -4,6 +4,7 @@ namespace public_html\application\controllers;
 
 use public_html\application\core\Controller;
 use public_html\application\core\View;
+use public_html\application\services\Flash;
 use public_html\application\services\Redirect;
 use public_html\application\services\Session;
 use public_html\application\services\CSRF;
@@ -31,7 +32,7 @@ class AdminController extends Controller {
         if (!$validate->passed()) {
             $errors = $validate->errors();
             $errors = implode("<br>",$errors);
-            Session::flash('errors', "$errors");
+            Flash::flash('errors', "$errors");
             Redirect::redirect('admin/sign-in');
         }
 

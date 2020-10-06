@@ -1,6 +1,6 @@
 <?php
 
-use public_html\application\services\Session;
+use public_html\application\services\Flash;
 
 ?>
 <!doctype html>
@@ -33,16 +33,16 @@ use public_html\application\services\Session;
     </div>
 </footer>
 
-<?php if (!Session::existsFlash('success')) : ?>
+<?php if (!Flash::existsFlash('success')) : ?>
     <div class="flash alert alert-success alert-dismissible fade show fixed-top" role="alert">
-        <p class="text-center"><?=Session::flash('success');?></p>
+        <p class="text-center"><?=Flash::flash('success');?></p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
      </button>
     </div>
-<?php elseif (!Session::existsFlash('errors')) : ?>
+<?php elseif (!Flash::existsFlash('errors')) : ?>
     <div class="flash alert alert-danger alert-dismissible fade show fixed-top" role="alert">
-        <p class="text-center"><?=Session::flash('errors');?></p>
+        <p class="text-center"><?=Flash::flash('errors');?></p>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
