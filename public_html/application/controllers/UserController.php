@@ -10,24 +10,34 @@ use public_html\application\services\Redirect;
 use public_html\application\services\Session;
 use public_html\application\services\CSRF;
 use public_html\application\services\Validate;
+use public_html\application\services\PasswordHelp;
 
 class UserController extends Controller {
 
-//    public function __construct($route)
-//    {
-//        parent::__construct($route);
-//        if (!$_SESSION['auth']) {
-//            echo 'вы не авторизованы';die;
-//        }
-//    }
+    public function __construct($route)
+    {
+        parent::__construct($route);
+        if (Session::exists('admin') == '') {
+            Flash::flash('errors', "Вы не авторизованн");
+            Redirect::redirect('admin/sign-in');
+        }
+    }
 
     public function index()
     {
         $pagination = new Pagination($this->route, $this->model->recordCount());
-        $vars = [
-            'pagination' => $pagination->get(),
-            'users' => $this->model->getAllRecord($this->getRoute()),
-        ];
+        if ($_POST) {
+            $vars = [
+                'pagination' => $pagination->get(),
+                'users' => $this->model->getAllRecord($this->getRoute(), $_POST['parameter'], $_POST['sort']),
+            ];
+        } else {
+            $vars = [
+                'pagination' => $pagination->get(),
+                'users' => $this->model->getAllRecord($this->getRoute(),'id', 'DESC'),
+            ];
+        }
+
         $this->getView()->render('Главная страница', $vars);
     }
 
@@ -50,7 +60,9 @@ class UserController extends Controller {
             Flash::flash('errors', "$errors");
             Redirect::redirect('user/create');
         }
-
+        if ($_POST) {
+            $_POST['password'] = PasswordHelp::passHash(($_POST['password']));
+        }
         $this->model->addRecord($_POST);
         Flash::flash('success', 'Сотрудник добавлен!');
         Redirect::redirect('');
@@ -96,7 +108,9 @@ class UserController extends Controller {
                 $id = $_POST['id'];
                 Redirect::redirect("user/edit/$id");
             }
-
+            if ($_POST) {
+                $_POST['password'] = PasswordHelp::passHash(($_POST['password']));
+            }
             $this->model->recordUpdate($this->route['id']);
             Flash::flash('success', 'Данные о сотруднике изменены!');
             Redirect::redirect('');

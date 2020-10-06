@@ -28,16 +28,15 @@ abstract class Model
         return $this->dbDriver->column("SELECT COUNT(id) FROM {$this->table}");
     }
 
-    public function getAllRecord($route)
+    public function getAllRecord($route, $parameter, $sort)
     {
-
         $max = 8;
         $params = [
             'max' => $max,
             'start' => ((($route['page'] ?? 1) - 1) * $max),
         ];
 
-        return $this->dbDriver->select("SELECT * FROM {$this->table} ORDER BY id DESC LIMIT :start, :max", $params);
+        return $this->dbDriver->select("SELECT * FROM {$this->table} ORDER BY {$parameter} {$sort} LIMIT :start, :max", $params);
     }
 
     public function addRecord($post)
@@ -61,12 +60,29 @@ abstract class Model
 
     }
 
+    public function isRecordExists_login($login)
+    {
+        $params = [
+            'login' => $login,
+        ];
+        return $this->dbDriver->column("SELECT login FROM {$this->table} WHERE login = :login",$params);
+
+    }
+
     public function getOne($id)
     {
         $params = [
             'id' => $id,
         ];
         return $this->dbDriver->select("SELECT * FROM {$this->table} WHERE id = :id", $params);
+    }
+
+    public function getOne_login($login)
+    {
+        $params = [
+            'login' => $login,
+        ];
+        return $this->dbDriver->select("SELECT * FROM {$this->table} WHERE login = :login", $params, 'one');
     }
 
     public function recordUpdate($id)

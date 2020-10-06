@@ -20,9 +20,12 @@ use public_html\application\services\Flash;
 </head>
 <body class="d-flex flex-column min-vh-100">
 <header>
-    <nav class="navbar navbar-light bg-info d-flex justify-content-center">
+    <nav class="navbar navbar-light bg-info d-flex justify-content-between">
         <div>
             <a class="badge badge-warning" href="#"><h2>Админ панель</h2></a>
+        </div>
+        <div>
+            <a class="badge badge-danger" href="/admin/logOut"><h2>Выйти</h2></a>
         </div>
     </nav>
 </header>

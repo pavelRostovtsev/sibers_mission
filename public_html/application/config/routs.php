@@ -41,5 +41,9 @@ return [
         'controller' => 'admin',
         'action' => 'authorization',
     ],
+    'admin/logOut' => [
+        'controller' => 'admin',
+        'action' => 'logOut',
+    ],
 
 ];
